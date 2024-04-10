@@ -11,9 +11,12 @@ def index():
     return render_template("home.html")
 
 @app.route('/login')
-def login():
+def user_login():
     return render_template("login.html")
 
+@app.route('/register')
+def user_register():
+    return render_template('registration.html')
 # @app.route('/dashboard')   
 # def shows():
 #     if 'user_id' not in session:

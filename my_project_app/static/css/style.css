@@ -1,0 +1,62 @@
+#login{
+    width: 400px;
+    height: 500px;
+    margin-top: 100px;
+    padding: 20px;
+}
+.nav-link{
+    margin-left: 20px;
+}
+.container-fluid{
+    display: flex;
+    justify-content: space-between;
+}
+.img_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    }
+.image-container{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateY(0deg);
+    transition: transform 0.7s;
+}
+.image-container span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+}
+.image-container span img{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+}
+.btn-container{
+    position: relative;
+    width: 80%;
+}
+.btn_img{
+    position:absolute;
+    bottom: -80px;
+    background:palevioletred;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#prev{
+    left: 20%;
+}
+#next{
+    right: 20%;
+}

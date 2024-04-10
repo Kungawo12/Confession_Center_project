@@ -19,7 +19,7 @@ class User:
     @classmethod
     def get_all_users(cls):
         query= "SELECT * FROM users"
-        results= connectToMySQL('belt_exam_db').query_db(query)
+        results= connectToMySQL('myProject_db').query_db(query)
         users = []
         
         for user in results:
@@ -33,18 +33,18 @@ class User:
         query = """INSERT INTO users(first_name,last_name,email,password)
                     VALUES(%(first_name)s,%(last_name)s,%(email)s,%(password)s);
         """
-        return connectToMySQL('belt_exam_db').query_db(query,data)
+        return connectToMySQL('myProject_db').query_db(query,data)
     
     @classmethod
     def show_user(cls,data):
         query ="SELECT * FROM users WHERE id = %(id)s;"
-        results = connectToMySQL('belt_exam_db').query_db(query,data)
+        results = connectToMySQL('myProject_db').query_db(query,data)
         return cls(results[0])
     
     @classmethod
     def get_by_email(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        results = connectToMySQL('belt_exam_db').query_db(query,data)
+        results = connectToMySQL('myProject_db').query_db(query,data)
         
         if len(results) < 1:
             return False
@@ -58,7 +58,7 @@ class User:
     #         LEFT JOIN pies on users.id = pies.user_id
     #         WHERE users.id = %(id)s
     #     """
-    #     results = connectToMySQL('belt_exam_db').query_db(query,data)
+    #     results = connectToMySQL('myProject_db').query_db(query,data)
         
     #     user = cls(results[0])
     #     for row in results:
