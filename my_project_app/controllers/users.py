@@ -1,5 +1,6 @@
 from flask import render_template,request, redirect,session,flash
 from my_project_app.models.user import User
+from my_project_app.models.confession import Confession
 
 from my_project_app import app
 from flask_bcrypt import Bcrypt
@@ -17,17 +18,18 @@ def user_login():
 @app.route('/register')
 def user_register():
     return render_template('registration.html')
-# @app.route('/dashboard')   
-# def shows():
-#     if 'user_id' not in session:
-#         flash('Please log in to view this page', "login")
-#         return redirect('/')
-#     data = {
-#         'id': session['user_id']
-#     }
-#     user_pies= User.get_one_with_pies(data)
-#     return render_template('dashboard.html', user= User.show_user(data),user_pies = user_pies)
 
+@app.route('/dashboard')   
+def confessions():
+    if 'user_id' not in session:
+        flash('Please log in to view this page', "login")
+        return redirect('/')
+    data = {
+        'id': session['user_id']
+    }
+    all_confession= Confession.get_all_confession()
+    return render_template('dashboard.html', user= User.show_user(data),confessions = all_confession)
+    
 
 @app.route('/user/register', methods=['POST'])
 def register():
