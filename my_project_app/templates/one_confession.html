@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="card bg-dark text-light p-3 m-5" id="confession">
+        
+        <h2 class="m-3 text-center">Confession  <p class="text-end"><a href="/dashboard" class="btn btn-outline-info ">Back</a></p></h2>
+        <div class="card-body">
+            <h3>{{ confession.title }}</h3>
+            <p>Category: {{ confession.category }}</p>
+            <p>{{ confession.story }}</p>
+            
+                <p>Created at: {{ confession.created_at }}</p>
+            
+            <div class="likeIcon">
+                <img src="../static/images/like.jpg" alt="like icon" class="likes"  id="likeButton" onclick ="likeClick()">
+                <span class="ms-2" id="like">0</span>
+            </div>
+
+    
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -21,3 +21,12 @@ nextBtn.addEventListener('click',()=>{
 function rotate(){
     imgContainer.style.transform = `perspective(1000px) rotateY(${x}deg)`;
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    let likeNum = 0;
+    let like = document.getElementById('like');
+    window.likeClick = function() {
+        likeNum += 1;
+        like.innerHTML = likeNum;
+    }
+});

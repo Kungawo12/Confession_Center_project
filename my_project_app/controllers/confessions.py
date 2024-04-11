@@ -26,3 +26,10 @@ def create_shows():
     Confession.save_confession(data)
     return redirect('/dashboard')
 
+@app.route('/confession/<int:id>')
+def show_confession(id):
+    data = {
+        'id': id
+    }
+    confession = Confession.show_one_confession(data)
+    return render_template('one_confession.html',confession=confession)
