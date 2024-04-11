@@ -1,0 +1,42 @@
+{%extends "layout.html"%}
+{%block body%}
+<div class="div_body">
+<div class="container " id="new_confession">
+    <div class="d-flex justify-content-between m-3 p-3">
+        <h3>Create Your Confession</h3>
+        <div class="div">
+            <a href="/dashboard" class="btn btn-outline-info me-3">Back to Dashboard</a>
+            <a href="/logout" class="btn btn-outline-danger">Log out</a>
+        </div>
+    </div>
+    <form  class="confession_body" action="/create/new" method="post">
+        {% with messages = get_flashed_messages(category_filter=['shows']) %}
+                    {% if messages %}
+                        {%for message in messages %}
+                            <p class="text-danger">{{ message }}</p>
+                        {%endfor%}
+                    {%endif%}
+                {%endwith%}
+            <input type="hidden" name="user_id" value="{{user.id}}">
+            <div class="form-group m-3">
+                <label for="title" class="mb-2">Title:</label>
+                <input type="text" class="form-control" name="title" id="title">
+            </div>
+            <div class="form-group m-3">
+                <label for="category" class="mb-2">Category:</label>
+                <input type="text" class="form-control" name="category" id="category">
+            </div>
+            <div class="form-floating m-3 mt-4" id="story">
+                <textarea class="form-control" placeholder="Leave a comment here" name="story" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Story</label>
+            </div>
+            <div class="form-group m-3">
+                <button type="submit" class=" btn btn-outline-primary mb-4">Add</button>
+            </div>
+        </form>
+            
+    </div>
+
+    </div>
+</div>
+{%endblock%}

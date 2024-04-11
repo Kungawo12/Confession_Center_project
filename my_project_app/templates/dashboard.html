@@ -1,6 +1,7 @@
 {%extends 'layout.html' %}
 {%block body%}
-<div class="container col-6 mt-4">
+<div class="div" id="dashboard">
+<div class="container col-6 mt-4" >
     <h1 class="m-3 text-center">Welcome to Confession </h1>
     <div class="d-flex justify-content-between m-3">
         <h3>ALL tv shows</h3>
@@ -9,8 +10,9 @@
     </div>
     <hr>
     <div>
+        <div class="table-container">
         <h4>Confessions: </h4>
-        <table class="table table-secondary table-hover">
+        <table class="table table-secondary table-hover ">
             <thead class="table-dark">
                 <tr>
                     <th>Title</th>
@@ -21,19 +23,14 @@
             <tbody>
                 {%for confession in confessions: %}
                 <tr>
-                    <td>{{confession.title}}</td>
+                    <td><a href="/confession/{{ confession.id }}">{{confession.title}}</a></td>
                     <td>{{confession.category}}</td>
-                    <td><a href="/confession/{{ confession.id }}">Show</a>{%if user.id == show.user.id%} |<a href="/confession/edit/{{confession.id}}">Edit</a>| <a href="/confession/delete/{{confession.id}}">Delete</a>{%endif%}</td>
+                    <td>{%if user.id == confession.user.id%} |<a href="/confession/edit/{{confession.id}}">Edit</a>| <a href="/confession/delete/{{confession.id}}">Delete</a>{%endif%}</td>
                 </tr>
                 {%endfor%}
             </tbody>
         </table>
     </div>
-    
-        
-
-    </table>
-    
-
+    </div>
 </div>
 {%endblock%}

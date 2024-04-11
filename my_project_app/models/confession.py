@@ -4,7 +4,7 @@ from flask import flash
 
 
 class Confession:
-    def __init(self,data):
+    def __init__(self,data):
         self.id = data['id']
         self.title = data['title']
         self.category = data['category']
