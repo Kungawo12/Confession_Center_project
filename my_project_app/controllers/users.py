@@ -23,7 +23,7 @@ def user_register():
 def confessions():
     if 'user_id' not in session:
         flash('Please log in to view this page', "login")
-        return redirect('/')
+        return redirect('/login')
     data = {
         'id': session['user_id']
     }
@@ -34,7 +34,7 @@ def confessions():
 @app.route('/user/register', methods=['POST'])
 def register():
     if not User.validate_register(request.form):
-        return redirect('/')
+        return redirect('/register')
     user_data = {
         "email": request.form['email']
     }
@@ -55,7 +55,7 @@ def register():
 @app.route('/user/login', methods = ['POST'])
 def login():
     if not User.validate_login(request.form):
-        return redirect('/')
+        return redirect('/login')
     data = {
         "email": request.form['log_email']
     }
@@ -63,7 +63,7 @@ def login():
     
     if not user:
         flash('Invalid Email', "login")
-        return redirect('/')
+        return redirect('/login')
     if not bcrypt.check_password_hash(user.password, request.form['log_password']):
         flash('Invalid Password', "login")
         return redirect('/')

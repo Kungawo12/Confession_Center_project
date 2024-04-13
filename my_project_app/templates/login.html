@@ -1,9 +1,13 @@
 {%extends "layout.html"%}
 {%block body%}
 <div class="container col-6">
+    <h2 class="m-3 text-center">Login</h2>
+    <hr>
+    <p class="text-end"><a href="/">HOME</a></p>
     <div class="card bg-primary p-3 m-5" id="login">
     <form action="/user/login" method="post">
-        <h2 class="m-3 text-center">Login</h2>
+        
+        <hr>
         {% with messages = get_flashed_messages(category_filter=['login']) %}
             {% if messages %}
                 {%for message in messages %}

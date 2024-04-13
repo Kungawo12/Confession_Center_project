@@ -1,7 +1,7 @@
 {%extends 'layout.html' %}
 {%block body%}
 <div class="div" id="dashboard">
-<div class="container col-6 mt-4" >
+<div class="container col-6" >
     <h1 class="m-3 text-center">Welcome to Confession </h1>
     <div class="d-flex justify-content-between m-3">
         <h3>ALL tv shows</h3>
@@ -25,7 +25,7 @@
                 <tr>
                     <td><a href="/confession/{{ confession.id }}">{{confession.title}}</a></td>
                     <td>{{confession.category}}</td>
-                    <td>{%if user.id == confession.user.id%} |<a href="/confession/edit/{{confession.id}}">Edit</a>| <a href="/confession/delete/{{confession.id}}">Delete</a>{%endif%}</td>
+                    <td>{%if user.id == confession.user.id%} <a href="/confession/edit/{{confession.id}}">Edit</a> || <a href="/confession/delete/{{confession.id}}">Delete</a>{%endif%}</td>
                 </tr>
                 {%endfor%}
             </tbody>

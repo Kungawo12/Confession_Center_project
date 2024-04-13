@@ -74,22 +74,25 @@
     padding: 0%;
     background-image: url(https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/27/7f/4c/277f4c43-c414-cfe6-7758-cc0f5564094a/AppIcon-1-1x_U007emarketing-85-220-6.png/460x0w.webp);
     background-size: cover;
-    height: 100vh;
+    height:100vh;
 }
 .div_body{
     margin: 0%;
     padding: 0%;
     background-image: url(https://blog.prezi.com/wp-content/uploads/2019/03/1_pzUhL5WpOeViwICDDgiLUA.jpeg);
     background-size: cover;
-    height: 100vh;
-    
+    height:100vh;
 }
+
+
 
 #new_confession{
     padding: 20px;
     border-radius: 10px;
 }
 .confession_body{
+    margin-left: auto;
+    margin-right: auto;
     padding: 30px;
     width: 700px;
     height: 500px;
@@ -97,7 +100,9 @@
     color: #fff;
 }
 
+
 .likes{
     height: 30px;
     width: 30px;
 }
+

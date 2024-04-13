@@ -33,3 +33,32 @@ def show_confession(id):
     }
     confession = Confession.show_one_confession(data)
     return render_template('one_confession.html',confession=confession)
+
+@app.route('/confession/edit/<int:id>')
+def edit_confession(id):
+    user_data = {
+        'id': session['user_id']
+    }
+    data={
+        "id":id
+    }
+    return render_template('edit_confession.html',confession=Confession.show_one_confession(data),user=User.show_user(user_data))
+
+@app.route('/confession/update/<int:id>', methods=['POST'])
+def update_confession(id):
+    data = {
+        "id": id,
+        "title": request.form['title'],
+        "category": request.form['category'],
+        "story": request.form['story']
+    }
+    Confession.update_confession(data)
+    return redirect('/dashboard')
+
+@app.route('/confession/delete/<int:id>')
+def delete_confession(id):
+    data = {
+        'id': id
+    }
+    Confession.delete_confession(data)
+    return redirect('/dashboard')

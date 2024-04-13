@@ -1,0 +1,43 @@
+{%extends "layout.html"%}
+
+{%block body%}
+
+<div style="margin:0%;padding:0%; background-image: url(https://www.lightstalking.com/wp-content/uploads/Photo-by-Dmitry-Ratushny-on-Unsplash.jpg); color:white; height:100vh; background-size: cover;">
+    <div class="container">
+        <div class="d-flex justify-content-between m-3 p-3">
+            <h1>Update Your  Written Confession</h1>
+            <div class="div">
+                <a href="/dashboard" class="btn btn-outline-info me-3">Back to Dashboard</a>
+                <a href="/logout" class="btn btn-outline-danger">Log out</a>
+            </div>
+        </div>
+        <div class="col-6 m-auto bg-secondary p-3">
+            <form action="/confession/update/{{confession.id}}" method="post">
+                {% with messages = get_flashed_messages(category_filter=['shows']) %}
+                            {% if messages %}
+                                {%for message in messages %}
+                                    <p class="text-danger">{{ message }}</p>
+                                {%endfor%}
+                            {%endif%}
+                        {%endwith%}
+                    <input type="hidden" name="user_id" value="{{user.id}}">
+                    <div class="form-group m-3">
+                        <label for="title" class="mb-2">Title:</label>
+                        <input type="text" class="form-control" name="title" id="title" value="{{confession.title}}">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="category" class="mb-2">Category:</label>
+                        <input type="text" class="form-control" name="category" id="category" value="{{confession.category}}">
+                    </div>
+                    <div class="form-floating m-3 mt-4" id="story">
+                        <textarea class="form-control" placeholder="Leave a comment here" name="story" id="floatingTextarea2" style="height: 100px">{{confession.story}}</textarea>
+                        <label for="floatingTextarea2">Story</label>
+                    </div>
+                    <div class="form-group m-3">
+                        <button type="submit" class=" btn btn-outline-primary mb-4">Update</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

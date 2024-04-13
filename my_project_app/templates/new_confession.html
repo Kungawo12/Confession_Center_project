@@ -1,15 +1,16 @@
 {%extends "layout.html"%}
 {%block body%}
 <div class="div_body">
-<div class="container " id="new_confession">
+<div class="container" id="new_confession">
     <div class="d-flex justify-content-between m-3 p-3">
-        <h3>Create Your Confession</h3>
+        <h1>Create Your Confession</h1>
         <div class="div">
             <a href="/dashboard" class="btn btn-outline-info me-3">Back to Dashboard</a>
             <a href="/logout" class="btn btn-outline-danger">Log out</a>
         </div>
     </div>
-    <form  class="confession_body" action="/create/new" method="post">
+    <div class="confession_body">
+    <form action="/create/new" method="post">
         {% with messages = get_flashed_messages(category_filter=['shows']) %}
                     {% if messages %}
                         {%for message in messages %}
@@ -34,6 +35,7 @@
                 <button type="submit" class=" btn btn-outline-primary mb-4">Add</button>
             </div>
         </form>
+        </div>
             
     </div>
 

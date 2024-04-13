@@ -67,3 +67,14 @@ class Confession:
         confession_obj.user = user_obj
         return confession_obj
         
+    @classmethod
+    def update_confession(cls,data):
+        query= """UPDATE confessions SET title = %(title)s, category = %(category)s, story = %(story)s
+                WHERE id = %(id)s;
+            """
+        return connectToMySQL('myProject_db').query_db(query,data)
+    
+    @classmethod
+    def delete_confession(cls,data):
+        query= "DELETE FROM confessions WHERE id = %(id)s;"
+        return connectToMySQL('myProject_db').query_db(query,data)
