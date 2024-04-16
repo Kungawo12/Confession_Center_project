@@ -31,8 +31,9 @@ def show_confession(id):
     data = {
         'id': id
     }
+    user_comment = Confession.get_all_comments({"confession_id": id})
     confession = Confession.show_one_confession(data)
-    return render_template('one_confession.html',confession=confession)
+    return render_template('one_confession.html',confession=confession,comments=user_comment)
 
 @app.route('/confession/edit/<int:id>')
 def edit_confession(id):
@@ -62,3 +63,15 @@ def delete_confession(id):
     }
     Confession.delete_confession(data)
     return redirect('/dashboard')
+
+@app.route('/comment/<int:id>', methods=['POST'])
+def get_comments(id):
+    data = {
+        'user_id': session['user_id'],
+        'confession_id': id,
+        'text': request.form['text']
+    }
+    Confession.save_comment(data)
+    return redirect('/confession/'+str(id))
+    
+        

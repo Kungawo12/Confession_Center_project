@@ -12,6 +12,7 @@ class Confession:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user = None
+        self.comments= None
     
     @classmethod
     def save_confession(cls,data):
@@ -78,3 +79,32 @@ class Confession:
     def delete_confession(cls,data):
         query= "DELETE FROM confessions WHERE id = %(id)s;"
         return connectToMySQL('myProject_db').query_db(query,data)
+    
+    @classmethod
+    def save_comment(cls,data):
+        query= """INSERT INTO comments(text,confession_id,user_id)
+                VALUES
+                (%(text)s,%(confession_id)s,%(user_id)s)
+                """
+        return connectToMySQL('myProject_db').query_db(query,data)
+    
+    @classmethod
+    def get_all_comments(cls,data):
+        query= """SELECT * FROM comments
+                LEFT JOIN users on comments.user_id = users.id
+                LEFT JOIN confessions on comments.confession_id = confessions.id
+                WHERE comments.confession_id = %(confession_id)s;
+            """
+        results = connectToMySQL('myProject_db').query_db(query,data)
+        comments =[]
+        for row in results:
+            comment_data = {
+                "comment_id": row["id"],
+                "comment_text": row["text"],
+                "confession_id": row["confessions.id"],
+                "user_id": row["users.id"],
+                "created_at": row["created_at"],
+                "updated_at": row['updated_at'],
+                }
+            comments.append(comment_data)
+        return comments
