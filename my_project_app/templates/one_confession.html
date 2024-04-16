@@ -12,9 +12,30 @@
                 <p>Created at: {{ confession.created_at }}</p>
             
             <div class="likeIcon">
-                <img src="../static/images/like.jpg" alt="like icon" class="likes"  id="likeButton" onclick ="likeClick()">
-                <span class="ms-2" id="like">0</span>
+                <img src="../static/images/like.jpg" alt="like icon" class="likes" id="likeButton" onclick="addLike()">
+                <span class="ms-2" id="like"> 0 </span>
             </div>
+            <div class="comment">
+                <h4>Comments</h4>
+                <form action="/comment/{{ confession.id }}" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="confession_id" value="confession.id">
+                        <input type="hidden" name="user_id" value="session['user_id']">
+                        <label for="comment">Comment</label>
+                        <textarea class="form-control w-75" name="text" id="comment" rows="1"></textarea>
+                        <button type="submit" class="btn btn-primary mt-2 ">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="comments">
+                {% for comment in comments %}
+                <div class="card bg-secondary text-light p-2 m-2">
+                    <p>comment:{{ comment.comment_text }}</p>
+                    <p>Created at: {{ comment.created_at }}</p>
+                    <hr>
+                </div>
+                
+                {% endfor %}
 
     
             

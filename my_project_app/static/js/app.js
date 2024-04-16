@@ -22,11 +22,26 @@ function rotate(){
     imgContainer.style.transform = `perspective(1000px) rotateY(${x}deg)`;
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    let likeNum = 0;
-    let like = document.getElementById('like');
-    window.likeClick = function() {
-        likeNum += 1;
-        like.innerHTML = likeNum;
-    }
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     const likeButton = document.getElementById('likeButton');
+//     const like = document.getElementById('like');
+//     let count = 0;
+
+//     likeButton.addEventListener('click', function() {
+//         count++;
+//         like.textContent = count;
+//     });
+// });
+// const likeButton = document.getElementById('likeButton');
+
+
+
+const likeButton = document.getElementById('likeButton');
+const like = document.getElementById('like');
+let count = 0;
+likeButton.addEventListener('click', addLike());
+
+function addLike(){
+    count++;
+    like.textContent = count;
+}
