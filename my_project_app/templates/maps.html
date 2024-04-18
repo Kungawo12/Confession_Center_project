@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="map_body">
+<div class="container">
+    <div class="body">
+        <h1>Google Maps</h1>
+        <div id="map"></div>
+    </div>
+
+    <div class="card bg-dark text-light">
+        <div class="card-header">
+            <h2>Address:</h2>
+            <p>Hilton Garden Inn Minneapolis Downtown
+                1101 S 4th Ave
+                Minneapolis, MN 55404</p>
+
+    </div>
+</div>
+
+
+
+<script src= "https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap&v=weekly"
+    defer></script>
+</div>
+{% endblock %}
