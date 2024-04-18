@@ -45,3 +45,19 @@ function addLike(){
     count++;
     like.textContent = count;
 }
+
+// function initMap() {
+//     var mapOptions = {
+//         center: { lat: 44.9778, lng: -93.2650 }, // Downtown Minneapolis coordinates
+//         zoom: 12 // Initial zoom level
+//     };
+//     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+// }
+
+function initMap() {
+    var mapOptions = {
+        center: { lat: 44.97043123001183, lng: -93.26979313386376 }, // Downtown Minneapolis coordinates
+        zoom: 17 // Initial zoom level
+    };
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+}

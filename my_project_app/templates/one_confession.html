@@ -28,18 +28,14 @@
                 </form>
             </div>
             <div class="comments">
+                <div class="card bg-light text-dark m-3 p-3 w-75">
                 {% for comment in comments %}
-                <div class="card bg-secondary text-light p-2 m-2">
                     <p>comment:{{ comment.comment_text }}</p>
-                    <p>Created at: {{ comment.created_at }}</p>
-                    <hr>
-                </div>
-                
+                    <p>Created at: {{ comment.created_at }} by: user#{{comment.user_id}}</p>
+                    <hr> 
                 {% endfor %}
-
-    
-            
-        </div>
+                </div>
+            </div>
     </div>
 </div>
 {% endblock %}
