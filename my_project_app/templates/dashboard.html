@@ -3,8 +3,8 @@
 <div class="div" id="dashboard">
 <div class="container col-6" >
     <h1 class="m-3 text-center">Welcome to Confession </h1>
-    <div class="d-flex justify-content-between m-3">
-        <h3>ALL tv shows</h3>
+    <div class="d-flex justify-content-evenly m-3">
+        <h3>Dashboard</h3>
         <a href='/confession/new' class="btn btn-outline-info">+ create</a>
         <a href="/logout" class="btn btn-outline-danger">Log out</a>
     </div>
@@ -16,7 +16,17 @@
             <thead class="table-dark">
                 <tr>
                     <th>Title</th>
-                    <th>Category</th>
+                    <th>
+                        <form id="categoryForm" action="/dashboard" method="GET">
+                            <select class="bg-dark text-light" name="category" onchange="submitForm()">
+                                <option value="all_category">All Categories</option>
+                                {% for category in all_categories %}
+                                    <option value="{{ category }}" {% if category == selected_category %} selected {% endif %}>{{category }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </th>
+                    
                     <th>More</th>
                 </tr>
             </thead>

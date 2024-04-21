@@ -67,6 +67,39 @@ class Confession:
         
         confession_obj.user = user_obj
         return confession_obj
+    
+    @classmethod
+    def get_confessions_by_category(cls, category):
+        query = """
+            SELECT * FROM confessions
+            JOIN users ON confessions.user_id = users.id
+            WHERE confessions.category = %(category)s;
+        """
+        data = {'category': category}
+        results = connectToMySQL('myProject_db').query_db(query, data)
+        
+        confessions = []
+        for row in results:
+            confession_data = {
+                "id": row["id"],
+                "title": row["title"],
+                "category": row["category"],
+                "story": row["story"],
+                "created_at": row["created_at"],
+                "updated_at": row["updated_at"],
+                # You can include user data if needed
+                "user": {
+                    "id": row["user_id"],
+                    "first_name": row["first_name"],
+                    "last_name": row["last_name"],
+                    "email": row["email"],
+                    "password": row["password"],
+                    # Add other user fields as needed
+                }
+            }
+            confessions.append(confession_data)
+        
+        return confessions
         
     @classmethod
     def update_confession(cls,data):
@@ -108,3 +141,24 @@ class Confession:
                 }
             comments.append(comment_data)
         return comments
+    
+    @staticmethod
+    def get_all_categories():
+        query = "SELECT DISTINCT category FROM confessions;"
+        results = connectToMySQL('myProject_db').query_db(query)
+        categories = [row['category'] for row in results]
+        return categories
+    
+    @staticmethod
+    def validate_confession(data):
+        is_valid = True
+        if len(data['title']) < 3:
+            flash("Title must be at least 3 characters.", "confession")
+            is_valid = False
+        if len(data['category']) < 3:
+            flash("Category must be at least 3 characters.", "confession")
+            is_valid = False
+        if len(data['story']) < 20:
+            flash("Story must be at least 20 characters.", "confession")
+            is_valid = False
+        return is_valid
