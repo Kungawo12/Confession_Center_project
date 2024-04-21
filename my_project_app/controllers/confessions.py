@@ -15,8 +15,9 @@ def new_confession():
 
 @app.route('/create/new', methods= ['POST'])
 def create_shows():
+    if not Confession.validate_confession(request.form):
+        return redirect('/confession/new')
     title =  request.form['title']
-    
     data = {
         "title" :title,
         "category" : request.form["category"],
@@ -47,6 +48,8 @@ def edit_confession(id):
 
 @app.route('/confession/update/<int:id>', methods=['POST'])
 def update_confession(id):
+    if not Confession.validate_confession(request.form):
+        return redirect('/confession/edit/'+str(id))
     data = {
         "id": id,
         "title": request.form['title'],

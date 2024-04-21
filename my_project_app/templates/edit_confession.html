@@ -13,7 +13,7 @@
         </div>
         <div class="col-6 m-auto bg-secondary p-3">
             <form action="/confession/update/{{confession.id}}" method="post">
-                {% with messages = get_flashed_messages(category_filter=['shows']) %}
+                {% with messages = get_flashed_messages(category_filter=['confession']) %}
                             {% if messages %}
                                 {%for message in messages %}
                                     <p class="text-danger">{{ message }}</p>
