@@ -142,6 +142,24 @@ class Confession:
             comments.append(comment_data)
         return comments
     
+    @classmethod
+    def like_confession(cls, data):
+        # Check if a like from this user already exists
+        query = """SELECT * FROM likes WHERE user_id = %(user_id)s AND confession_id = %(confession_id)s"""
+        existing_like = connectToMySQL('myProject_db').query_db(query, data)
+
+        if not existing_like:  # If no existing like was found
+            # Insert a new like
+            query = """INSERT INTO likes(user_id, confession_id) VALUES (%(user_id)s, %(confession_id)s)"""
+            connectToMySQL('myProject_db').query_db(query, data)
+    
+    @classmethod
+    def get_like_count(cls, confession_id):
+        query = "SELECT COUNT(*) as count FROM likes WHERE confession_id = %(confession_id)s"
+        data = {'confession_id': confession_id}
+        result = connectToMySQL('myProject_db').query_db(query, data)
+        return result[0]['count']
+    
     @staticmethod
     def get_all_categories():
         query = "SELECT DISTINCT category FROM confessions;"

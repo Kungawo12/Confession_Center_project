@@ -24,9 +24,7 @@ def confessions():
     if 'user_id' not in session:
         flash('Please log in to view this page', "login")
         return redirect('/login')
-    
     selected_category = request.args.get('category', "all_category")
-    print(f"Selected category: {selected_category}")
     data = {
         'id': session['user_id']
     }
@@ -34,7 +32,6 @@ def confessions():
         filtered_confessions = Confession.get_all_confession()
     else:
         filtered_confessions = Confession.get_confessions_by_category(selected_category)
-    print(f"Number of confessions fetched: {len(filtered_confessions)}")
     all_categories = Confession.get_all_categories()
     return render_template('dashboard.html', user= User.show_user(data),confessions = filtered_confessions,selected_category=selected_category, all_categories=all_categories)
     

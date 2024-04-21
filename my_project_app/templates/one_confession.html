@@ -11,10 +11,14 @@
             
                 <p>Created at: {{ confession.created_at }}</p>
             
-            <div class="likeIcon">
-                <img src="../static/images/like.jpg" alt="like icon" class="likes" id="likeButton" onclick="addLike()">
-                <span class="ms-2" id="like"> 0 </span>
-            </div>
+                <form action="/like_confession" method="post">
+                    <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+                    <input type="hidden" name="confession_id" value="{{ confession.id }}">
+                    <button type="submit" class="btn btn-link p-0 border-0">
+                        <img src="../static/images/like.jpg" alt="like icon" class="likes" id="likeButton">
+                    </button>
+                    <span class="ms-2" id="like"> {{ like_count }} </span>
+                </form>
             <div class="comment">
                 <h4>Comments</h4>
                 <form action="/comment/{{ confession.id }}" method="post">
