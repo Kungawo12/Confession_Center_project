@@ -20,14 +20,14 @@ class Confession:
                 VALUES
                 (%(title)s,%(category)s,%(story)s,%(user_id)s)
                 """
-        return connectToMySQL('myProject_db').query_db(query,data)
+        return connectToMySQL('my_project_db').query_db(query,data)
     
     @classmethod
     def get_all_confession(cls):
         query= """SELECT * FROM confessions
                 LEFT JOIN users on confessions.user_id = users.id;
             """
-        results = connectToMySQL('myProject_db').query_db(query)
+        results = connectToMySQL('my_project_db').query_db(query)
         
         user_with_confession =[]
         for row in results:
@@ -52,7 +52,7 @@ class Confession:
                 JOIN users on confessions.user_id = users.id
                 WHERE confessions.id = %(id)s;
             """
-        results = connectToMySQL('myProject_db').query_db(query,data)
+        results = connectToMySQL('my_project_db').query_db(query,data)
         confession_dict =results[0]
         confession_obj = cls(confession_dict)
         user_obj = User({
@@ -76,7 +76,7 @@ class Confession:
             WHERE confessions.category = %(category)s;
         """
         data = {'category': category}
-        results = connectToMySQL('myProject_db').query_db(query, data)
+        results = connectToMySQL('my_project_db').query_db(query, data)
         
         confessions = []
         for row in results:
@@ -106,12 +106,12 @@ class Confession:
         query= """UPDATE confessions SET title = %(title)s, category = %(category)s, story = %(story)s
                 WHERE id = %(id)s;
             """
-        return connectToMySQL('myProject_db').query_db(query,data)
+        return connectToMySQL('my_project_db').query_db(query,data)
     
     @classmethod
     def delete_confession(cls,data):
         query= "DELETE FROM confessions WHERE id = %(id)s;"
-        return connectToMySQL('myProject_db').query_db(query,data)
+        return connectToMySQL('my_project_db').query_db(query,data)
     
     @classmethod
     def save_comment(cls,data):
@@ -119,7 +119,7 @@ class Confession:
                 VALUES
                 (%(text)s,%(confession_id)s,%(user_id)s)
                 """
-        return connectToMySQL('myProject_db').query_db(query,data)
+        return connectToMySQL('my_project_db').query_db(query,data)
     
     @classmethod
     def get_all_comments(cls,data):
@@ -128,7 +128,7 @@ class Confession:
                 LEFT JOIN confessions on comments.confession_id = confessions.id
                 WHERE comments.confession_id = %(confession_id)s;
             """
-        results = connectToMySQL('myProject_db').query_db(query,data)
+        results = connectToMySQL('my_project_db').query_db(query,data)
         comments =[]
         for row in results:
             comment_data = {
@@ -146,24 +146,24 @@ class Confession:
     def like_confession(cls, data):
         # Check if a like from this user already exists
         query = """SELECT * FROM likes WHERE user_id = %(user_id)s AND confession_id = %(confession_id)s"""
-        existing_like = connectToMySQL('myProject_db').query_db(query, data)
+        existing_like = connectToMySQL('my_project_db').query_db(query, data)
 
         if not existing_like:  # If no existing like was found
             # Insert a new like
             query = """INSERT INTO likes(user_id, confession_id) VALUES (%(user_id)s, %(confession_id)s)"""
-            connectToMySQL('myProject_db').query_db(query, data)
+            connectToMySQL('my_project_db').query_db(query, data)
     
     @classmethod
     def get_like_count(cls, confession_id):
         query = "SELECT COUNT(*) as count FROM likes WHERE confession_id = %(confession_id)s"
         data = {'confession_id': confession_id}
-        result = connectToMySQL('myProject_db').query_db(query, data)
+        result = connectToMySQL('my_project_db').query_db(query, data)
         return result[0]['count']
     
     @staticmethod
     def get_all_categories():
         query = "SELECT DISTINCT category FROM confessions;"
-        results = connectToMySQL('myProject_db').query_db(query)
+        results = connectToMySQL('my_project_db').query_db(query)
         categories = [row['category'] for row in results]
         return categories
     
